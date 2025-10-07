@@ -1,0 +1,22 @@
+services:
+  worker:
+    build: ./worker
+    container_name: libvirt-worker
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock
+      - /run/libvirt/libvirt-sock:/run/libvirt/libvirt-sock
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+
+  agg:
+    build: ./agg
+    container_name: libvirt-agg
+    env_file: .env
+    ports:
+      - "8081:8081"
+    depends_on:
+      - worker
+    restart: unless-stopped
