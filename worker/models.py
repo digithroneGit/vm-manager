@@ -20,3 +20,6 @@ class VMDetail(VMSummary):
 class VMActionRequest(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     state: StrictStr
+
+
+#django habbits
