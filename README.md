@@ -1,7 +1,14 @@
 Sample code taken from a project that is managing internal infrastructure / IoT devices, this part is VM specific.
 
 
-Stack: Fastapi/Asyncio/Pydantic/Docker
+Agg docker image: Fastapi/Asyncio/Pydantic
+
+used to communicate with worker nodes, each VM server has both running, for HA purposes (in case one server is down for maintenance, traffic is directed to a different one that is available (nginx proxy handles LB)), as such as long as there is one VM server available, the API endpoint would be up and running, along with its workers.
+
+Worker docker image: Fastapi/libvirt connection
+
+used to communicate with libvirt with appropriate user via exposed unix socket. 
+
 
 GET all example:
 
